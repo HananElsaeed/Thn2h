@@ -91,7 +91,7 @@ class SignInRepository {
 
                     } else {
                         // If sign in fails, display a message to the user.
-                        if (!isNetworkAvailable()) {
+                        if (!ChechInternerConnection.isNetworkAvailable(signViewModel!!.passContext())) {
                             signViewModel!!.display("Please check the internet connection")
                         }
                         else signViewModel!!.display(task.exception!!.message.toString())
@@ -104,13 +104,7 @@ class SignInRepository {
 
 
     }
-    fun isNetworkAvailable(): Boolean {
-        ChechInternerConnection.signViewModel = SignInActivity()
-        val connectivityManager =
-            ChechInternerConnection.signViewModel!!.passContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected
-    }
+
 
 
 

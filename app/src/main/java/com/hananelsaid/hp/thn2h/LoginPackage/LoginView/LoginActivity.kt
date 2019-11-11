@@ -23,14 +23,13 @@ class LoginActivity : AppCompatActivity() {
     var password: String = ""
 
     var viewModelRef: LoginViewModel? = null
-    private lateinit var auth: FirebaseAuth
+
 
     @RequiresApi(Build.VERSION_CODES.FROYO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        viewModelRef =
-            ViewModelProviders.of(this, LoginViewModelFactory(this)).get(LoginViewModel::class.java)
+        viewModelRef = ViewModelProviders.of(this, LoginViewModelFactory(this)).get(LoginViewModel::class.java)
 
         btnLogin.setOnClickListener {
             email = etloginemail.text!!.toString().trim()

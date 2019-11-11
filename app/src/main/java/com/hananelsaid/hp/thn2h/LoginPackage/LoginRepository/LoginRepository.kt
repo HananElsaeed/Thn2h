@@ -8,9 +8,8 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
+import com.hananelsaid.hp.thn2h.ChechInternerConnection
 import com.hananelsaid.hp.thn2h.LoginPackage.LoginViewModel.LoginViewModel
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.hananelsaid.hp.thn2h.HomePackage.HomeView.HomeActivity
 import com.hananelsaid.hp.thn2h.LoginPackage.LoginView.LoginActivity
 
@@ -60,7 +59,7 @@ class LoginRepository {
                         verifyEmail()
 
                     } else {
-                        if (!isNetworkAvailable()) {
+                        if (!ChechInternerConnection.isNetworkAvailable(loginViewModel!!.passContext())) {
                             /* loginViewModel!!.display("Please check the internet connection")*/
                             getEmailPassword(email!!, pass!!)
                         } else
@@ -82,8 +81,8 @@ class LoginRepository {
         if (mail.equals(email)) {
             if (pass.equals(password)) {
 
-                var openLoginActivity =Intent(loginViewModel!!.passContext(), HomeActivity::class.java)
-                loginViewModel!!.passContext().startActivity(openLoginActivity)
+
+
 
 
             } else loginViewModel!!.display("Incorect password")
@@ -100,10 +99,5 @@ class LoginRepository {
             loginViewModel!!.display("you should verify your email")
     }
 
-    private fun isNetworkAvailable(): Boolean {
-        val connectivityManager =
-            loginViewModel!!.passContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected
-    }
+
 }

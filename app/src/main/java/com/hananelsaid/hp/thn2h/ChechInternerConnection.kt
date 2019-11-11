@@ -7,12 +7,9 @@ import com.hananelsaid.hp.thn2h.SignInPackage.SignInViewModel.SignInViewModel
 
 class ChechInternerConnection() {
     companion object {
-        internal var signViewModel: SignInActivity? = null
 
-        fun isNetworkAvailable(): Boolean {
-            signViewModel = SignInActivity()
-            val connectivityManager =
-                signViewModel!!.passContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        fun isNetworkAvailable(context:Context): Boolean {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
             val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
             return activeNetworkInfo != null && activeNetworkInfo.isConnected
         }

@@ -1,4 +1,4 @@
-package com.hananelsaid.hp.thn2h.ui.groups
+package com.hananelsaid.hp.thn2h.groups
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

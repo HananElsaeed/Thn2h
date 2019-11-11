@@ -1,4 +1,4 @@
-package com.hananelsaid.hp.thn2h.ui.home
+package com.hananelsaid.hp.thn2h.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

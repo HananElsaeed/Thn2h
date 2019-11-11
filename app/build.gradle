@@ -35,8 +35,12 @@ dependencies {
     //firebase
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
-//facebook
-    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+   /* //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'*/
+    //circle image
+   // implementation 'de.hdodenhof:circleimageview:3.0.1'
+    //floating action menu
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'androidx.navigation:navigation-fragment:2.0.0'
     implementation 'androidx.navigation:navigation-ui:2.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
