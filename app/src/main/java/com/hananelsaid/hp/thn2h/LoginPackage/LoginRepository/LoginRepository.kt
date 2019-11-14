@@ -1,17 +1,13 @@
 package com.hananelsaid.hp.thn2h.LoginPackage.LoginRepository
 
 import android.content.Context
-import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.AsyncTask
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
-import com.hananelsaid.hp.thn2h.ChechInternerConnection
+import com.hananelsaid.hp.thn2h.CheckInternerConnection
 import com.hananelsaid.hp.thn2h.LoginPackage.LoginViewModel.LoginViewModel
-import com.hananelsaid.hp.thn2h.HomePackage.HomeView.HomeActivity
-import com.hananelsaid.hp.thn2h.LoginPackage.LoginView.LoginActivity
 
 class LoginRepository {
 
@@ -59,7 +55,7 @@ class LoginRepository {
                         verifyEmail()
 
                     } else {
-                        if (!ChechInternerConnection.isNetworkAvailable(loginViewModel!!.passContext())) {
+                        if (!CheckInternerConnection.isNetworkAvailable(loginViewModel!!.passContext())) {
                             /* loginViewModel!!.display("Please check the internet connection")*/
                             getEmailPassword(email!!, pass!!)
                         } else

@@ -1,23 +1,15 @@
 package com.hananelsaid.hp.thn2h.SignInPackage.SignInRepository
 
-import android.content.ContentValues
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.ConnectivityManager
 import android.os.AsyncTask
-import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.auth.FirebaseAuth
 import com.hananelsaid.hp.thn2h.LoginPackage.LoginView.LoginActivity
 import com.hananelsaid.hp.thn2h.SignInPackage.SignInViewModel.SignInViewModel
-import android.net.NetworkInfo
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
-import com.hananelsaid.hp.thn2h.ChechInternerConnection
-import com.hananelsaid.hp.thn2h.SignInPackage.SignInView.SignInActivity
+import com.hananelsaid.hp.thn2h.CheckInternerConnection
 
 
 class SignInRepository {
@@ -91,7 +83,7 @@ class SignInRepository {
 
                     } else {
                         // If sign in fails, display a message to the user.
-                        if (!ChechInternerConnection.isNetworkAvailable(signViewModel!!.passContext())) {
+                        if (!CheckInternerConnection.isNetworkAvailable(signViewModel!!.passContext())) {
                             signViewModel!!.display("Please check the internet connection")
                         }
                         else signViewModel!!.display(task.exception!!.message.toString())

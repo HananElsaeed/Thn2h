@@ -52,9 +52,9 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.HolderClass>(), Filte
                     ContextCompat.getDrawable(ctx!!, com.hananelsaid.hp.thn2h.R.drawable.thn2h)
                 )
             if (contact.isSelected()) {
-                holder.view.setBackgroundResource(com.hananelsaid.hp.thn2h.R.drawable.cardselectedbackground)
-            } else {
                 holder.view.setBackgroundResource(com.hananelsaid.hp.thn2h.R.drawable.btnexittext)
+            } else {
+                holder.view.setBackgroundResource(com.hananelsaid.hp.thn2h.R.drawable.cardselectedbackground)
             }
 
 

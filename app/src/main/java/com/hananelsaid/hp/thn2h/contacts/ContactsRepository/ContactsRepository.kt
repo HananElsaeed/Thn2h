@@ -1,8 +1,10 @@
 package com.hananelsaid.hp.thn2h.contacts.ContactsRepository
 
+import android.content.Context
 import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.MediaStore
+import com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsViewModel.CreatGroupViewModel
 import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
 import com.hananelsaid.hp.thn2h.contacts.ContactsViewModel.ContactsViewModel
 import java.util.*
@@ -10,22 +12,28 @@ import kotlin.collections.ArrayList
 
 class ContactsRepository {
 
-    var contactViewModel: ContactsViewModel
+    lateinit var contactViewModel: ContactsViewModel
+    lateinit var creatGroupViewModel: CreatGroupViewModel
 
 
     constructor(contactViewModel: ContactsViewModel) {
         this.contactViewModel = contactViewModel
     }
 
+    constructor(creatGroupViewModel: CreatGroupViewModel) {
+        this.creatGroupViewModel = creatGroupViewModel
+    }
 
-    fun getContactsList(): List<Contact> {
+
+    fun getContactsList(context: Context): List<Contact> {
 
         val contactList: MutableList<Contact> = ArrayList()
-        val contacts = contactViewModel.passContext().contentResolver.query(
+        val contacts = context.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             null,
             null,
-            null,null)
+            null, null
+        )
         while (contacts!!.moveToNext()) {
             val name =
                 contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
@@ -39,7 +47,7 @@ class ContactsRepository {
                 contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI))
             if (photo_uri != null) {
                 obj.image = MediaStore.Images.Media.getBitmap(
-                    contactViewModel.passContext().contentResolver,
+                    context.contentResolver,
                     Uri.parse(photo_uri)
                 )
             }

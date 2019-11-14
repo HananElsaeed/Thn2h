@@ -1,29 +1,15 @@
 package com.hananelsaid.hp.thn2h
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.google.firebase.auth.FirebaseAuth
 import com.hananelsaid.hp.thn2h.HomePackage.HomeView.HomeActivity
 import com.hananelsaid.hp.thn2h.LoginPackage.LoginView.LoginActivity
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import androidx.core.app.ActivityCompat
-import android.content.DialogInterface
-import android.os.Build
-import android.annotation.TargetApi
-import android.content.pm.PackageManager
-import androidx.core.content.ContextCompat
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import androidx.appcompat.app.AlertDialog
 
 
-class MainActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     //firebase
     private var auth: FirebaseAuth? = null
 
@@ -31,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!isNetworkAvailable()){
+        if (!CheckInternerConnection.isNetworkAvailable(this)){
 
         }
         // Initialize Firebase Auth
@@ -56,10 +42,6 @@ class MainActivity : AppCompatActivity() {
        // requestContactPermission()
     }
 
-    private fun isNetworkAvailable(): Boolean {
-        val connectivityManager =getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected
-    }
+
 
 }

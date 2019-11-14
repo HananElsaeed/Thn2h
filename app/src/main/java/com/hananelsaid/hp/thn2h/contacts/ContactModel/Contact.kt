@@ -6,7 +6,7 @@ class Contact {
     var name = ""
     var number = ""
     var image : Bitmap? = null
-    private var isSelected: Boolean = true
+    private var isSelected: Boolean = false
 
     fun setSelected(selected: Boolean) {
         isSelected = selected;

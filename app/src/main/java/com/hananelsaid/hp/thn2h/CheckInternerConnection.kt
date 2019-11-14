@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import com.hananelsaid.hp.thn2h.SignInPackage.SignInView.SignInActivity
 import com.hananelsaid.hp.thn2h.SignInPackage.SignInViewModel.SignInViewModel
 
-class ChechInternerConnection() {
+class CheckInternerConnection() {
     companion object {
 
         fun isNetworkAvailable(context:Context): Boolean {

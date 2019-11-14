@@ -30,9 +30,9 @@ class ContactsFragment : Fragment() ,ContactAdapter.ChnageStatusListener{
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         contactsViewModel =ViewModelProviders.of(this,ContactsViewModelFactory(this)).get(
             ContactsViewModel::class.java)
-        val root = inflater.inflate(com.hananelsaid.hp.thn2h.R.layout.fragment_contacts, container, false)
-        recyclerView = root.findViewById(com.hananelsaid.hp.thn2h.R.id.contact_list)
-        searchView=root.findViewById(com.hananelsaid.hp.thn2h.R.id.searchView)
+        val root = inflater.inflate(R.layout.fragment_contacts, container, false)
+        recyclerView = root.findViewById(R.id.contact_list)
+        searchView=root.findViewById(R.id.searchView)
        // recyclerView.textCh
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -70,10 +70,10 @@ class ContactsFragment : Fragment() ,ContactAdapter.ChnageStatusListener{
         recyclerView!!.setAdapter(adapterClass)
     }
 
-    fun passContext(): Context {
+   /* fun passContext(): Context {
         return this!!.activity!!
     }
-
+*/
     override fun onItemChangeListener(position: Int, model: Contact) {
         try {
 

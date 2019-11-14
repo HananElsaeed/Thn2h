@@ -15,4 +15,6 @@
     <string name="logout">Logout</string>
     <string name="typemobilenumber">Type mobile number</string>
     <string name="messagetext">Type your message</string>
+    <string name="groupname">Enter Group Name</string>
+    <string name="members">Members :</string>
 </resources>
