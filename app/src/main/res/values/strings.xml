@@ -17,4 +17,20 @@
     <string name="messagetext">Type your message</string>
     <string name="groupname">Enter Group Name</string>
     <string name="members">Members :</string>
+    <string name="time">Time</string>
+    <string name="send_via">Send Via</string>
+    <string name="now">Now</string>
+    <string name="custom">Custom</string>
+    <string name="date">Date</string>
+    <string name="time2">Time2</string>
+    <string name="title_activity_choose_reciver">ChooseReciverActivity</string>
+    <string name="tab_text_1">Groups</string>
+    <string name="tab_text_2">Contacts</string>
+    <string name="title_pending">Pending</string>
+    <string name="title_completed">Completed</string>
+    <string name="tvinitnumber">010</string>
+    <string name="choosesendingway">Choose sending way</string>
+    <string name="whatsthenSMS">WhatsApp to all then SMS to others</string>
+    <string name="smstoall">SMS to all</string>
+    <string name="smsthenwhats">SMS to all with same carier and whatsapp to others</string>
 </resources>

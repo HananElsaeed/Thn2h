@@ -1,45 +1,38 @@
 package com.hananelsaid.hp.thn2h.groups
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.DatabaseReference
 import com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsModel.GroupClass
-import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
+import com.hananelsaid.hp.thn2h.groups.GroupView.GroupsFragment
 
-class GroupsViewModel : ViewModel() {
+class GroupsViewModel : ViewModel {
 
-    //lateinit var groupsRepoRef: GroupsRepo
+
+    lateinit var groupsRepo: GroupRepositroy
     lateinit var groupsViewRef: GroupsFragment
     private lateinit var mutableLiveData: MutableLiveData<ArrayList<GroupClass>>
 
 
-/*
-    constructor(groupsViewRef: GroupsFragment){
-        this.groupsViewRef=groupsViewRef
-       // groupsRepoRef= GroupsRepo(this)
-        //mutableLiveData = MutableLiveData()
-        mutableLiveData= GroupsRepo.getGroupInstance(groupsViewRef!!.activity).getGroupsFromFirebase()
-
-    }*/
-
-   fun  initViewModel(context:Context){
-        mutableLiveData= GroupsRepo.getGroupInstance(context).getGroupsFromFirebase()
+    constructor(){
+        groupsRepo = GroupRepositroy()
+        mutableLiveData = MutableLiveData()
     }
 
+    fun loadGroups(ref: DatabaseReference):MutableLiveData<ArrayList<GroupClass>>{
+        return groupsRepo.loadGroups(ref)
+    }
 
+/*
     fun getGroupsList ():LiveData<ArrayList<GroupClass>>{
-       // mutableLiveData.postValue(groupsRepoRef!!.getGroupsFromFirebase())
+        mutableLiveData.postValue(groupsRepoRef!!.getGroupsFromFirebase())
 
         return mutableLiveData as MutableLiveData<ArrayList<GroupClass>>
 
 
 
-    }
+    }*/
 
 
-    /* private val _text = MutableLiveData<String>().apply {
-         value = "This is dashboard Fragment"
-     }
-     val text: LiveData<String> = _text*/
 }

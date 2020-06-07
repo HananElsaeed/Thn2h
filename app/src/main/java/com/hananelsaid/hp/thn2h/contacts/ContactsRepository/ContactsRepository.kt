@@ -7,6 +7,7 @@ import android.provider.MediaStore
 import com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsViewModel.CreatGroupViewModel
 import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
 import com.hananelsaid.hp.thn2h.contacts.ContactsViewModel.ContactsViewModel
+import com.hananelsaid.hp.thn2h.ui.ChooseReciver.ChooseContacts.ChooseContactsViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -14,6 +15,7 @@ class ContactsRepository {
 
     lateinit var contactViewModel: ContactsViewModel
     lateinit var creatGroupViewModel: CreatGroupViewModel
+    lateinit var chooseContactsViewModel: ChooseContactsViewModel
 
 
     constructor(contactViewModel: ContactsViewModel) {
@@ -22,6 +24,10 @@ class ContactsRepository {
 
     constructor(creatGroupViewModel: CreatGroupViewModel) {
         this.creatGroupViewModel = creatGroupViewModel
+    }
+
+    constructor(chooseContactsViewModel: ChooseContactsViewModel) {
+        this.chooseContactsViewModel = chooseContactsViewModel
     }
 
 

@@ -20,17 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.hananelsaid.hp.thn2h.LoginPackage.LoginView.LoginActivity
 
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.Manifest.permission
-import android.Manifest.permission.SEND_SMS
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.R
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentActivity
 
 
 class HomeActivity : AppCompatActivity() {
@@ -48,13 +38,15 @@ class HomeActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                com.hananelsaid.hp.thn2h.R.id.navigation_home,
-                com.hananelsaid.hp.thn2h.R.id.navigation_dashboard,
-                com.hananelsaid.hp.thn2h.R.id.navigation_notifications
+                com.hananelsaid.hp.thn2h.R.id.navigation_pending,
+                com.hananelsaid.hp.thn2h.R.id.navigation_groups,
+                com.hananelsaid.hp.thn2h.R.id.navigation_completed
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
 
     //menu to sinout

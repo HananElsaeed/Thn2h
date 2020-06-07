@@ -1,26 +1,30 @@
 package com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsView
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsModel.GroupClass
 import com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsViewModel.CreatGroupViewModel
+import com.hananelsaid.hp.thn2h.HomePackage.HomeView.HomeActivity
 import com.hananelsaid.hp.thn2h.R
 import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
 import com.hananelsaid.hp.thn2h.contacts.ContactsViews.ContactAdapter
-import java.util.ArrayList
+import java.util.*
 
-class CreatGroup : AppCompatActivity(), ContactAdapter.ChnageStatusListener {
+class CreatGroupActivity : AppCompatActivity(), ContactAdapter.ChnageStatusListener {
     private lateinit var creatGroupViewModel: CreatGroupViewModel
     private var adapterClass: ContactAdapter? = null
     private var recyclerView: RecyclerView? = null
@@ -30,12 +34,14 @@ class CreatGroup : AppCompatActivity(), ContactAdapter.ChnageStatusListener {
 
     //firebase
     private var auth: FirebaseAuth? = null
+    private var databaseReference: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creat_group)
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+        databaseReference = FirebaseDatabase.getInstance().getReference("groups")
 
 
         creatGroupViewModel = ViewModelProviders.of(this, CreatGroupViewModelFactory(this)).get(
@@ -44,6 +50,8 @@ class CreatGroup : AppCompatActivity(), ContactAdapter.ChnageStatusListener {
 
         recyclerView = findViewById(R.id.contact_list2)
         searchView = findViewById(R.id.searchView2)
+
+
         floatbtnsave = findViewById(R.id.floatbtnsave)
         etgroupName = findViewById(R.id.etgroupName)
         // recyclerView.textCh
@@ -81,18 +89,26 @@ class CreatGroup : AppCompatActivity(), ContactAdapter.ChnageStatusListener {
 
                 //Log.i("try", ""+temp.get(0).name)
                 if (auth!!.currentUser != null) {
-                    val uid = auth!!.currentUser!!.uid
-                    var group: GroupClass = GroupClass(uid, groupName, temp)
+                    // val uid = auth!!.currentUser!!.uid
+                    val groupId: String =
+                        databaseReference!!.child(auth!!.currentUser!!.uid).child("groups").push()
+                            .getKey()!!
+                    var group: GroupClass = GroupClass(groupId, groupName, temp)
 
-                      creatGroupViewModel.uploadGroup(group)
+                    creatGroupViewModel.uploadGroup(group)
                 }
+                startActivity(Intent(this,HomeActivity::class.java))
+                // findNavController(R.id.nav_host_fragment);
+                this.finish()
+
             }
         }
     }
 
     override fun onStart() {
-        var temp = ArrayList<Contact>()
         super.onStart()
+        var temp = ArrayList<Contact>()
+
         setAdapter()
         creatGroupViewModel.getAllOrders()!!.observe(this, object : Observer<MutableList<Contact>> {
 
@@ -141,16 +157,16 @@ class CreatGroup : AppCompatActivity(), ContactAdapter.ChnageStatusListener {
 
 
     internal inner class CreatGroupViewModelFactory : ViewModelProvider.Factory {
-        private var creatGroup: CreatGroup
+        private var creatGroupActivity: CreatGroupActivity
 
-        constructor(creatGroup: CreatGroup) {
-            this.creatGroup = creatGroup
+        constructor(creatGroupActivity: CreatGroupActivity) {
+            this.creatGroupActivity = creatGroupActivity
 
         }
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return CreatGroupViewModel(
-                creatGroup
+                creatGroupActivity
             ) as T
         }
     }

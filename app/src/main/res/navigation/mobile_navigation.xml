@@ -3,23 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_pending">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.hananelsaid.hp.thn2h.home.HomeFragment"
+        android:id="@+id/navigation_pending"
+        android:name="com.hananelsaid.hp.thn2h.PendingMessage.PendingMessageFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.hananelsaid.hp.thn2h.groups.GroupsFragment"
+        android:id="@+id/navigation_groups"
+        android:name="com.hananelsaid.hp.thn2h.groups.GroupView.GroupsFragment"
         android:label="@string/title_group"
         tools:layout="@layout/fragment_groups" />
 
-    <fragment
+   <!-- <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.hananelsaid.hp.thn2h.contacts.ContactsViews.ContactsFragment"
         android:label="@string/title_contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contacts" />-->
+
+    <fragment
+        android:id="@+id/navigation_completed"
+        android:name="com.hananelsaid.hp.thn2h.CompletedMessages.CompletedMessagesFragment"
+        android:label="@string/title_completed"
+        tools:layout="@layout/completed_messages_fragment" />
+
 </navigation>

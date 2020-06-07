@@ -76,10 +76,7 @@ class LoginRepository {
         Log.i("tag", email)
         if (mail.equals(email)) {
             if (pass.equals(password)) {
-
-
-
-
+                loginViewModel!!.openHomeActivity()
 
             } else loginViewModel!!.display("Incorect password")
         } else

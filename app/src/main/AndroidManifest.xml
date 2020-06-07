@@ -15,7 +15,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreatGroups.CreatGroupsView.CreatGroup"></activity>
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity android:name=".OptionActivity" />
+
+        <receiver
+            android:name=".alarm.MySMSReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.ChooseReciver.ChooseReciverActivity"
+            android:label="@string/title_activity_choose_reciver"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddMessage.AddMessageActivity"
+            android:theme="@style/AppTheme.Splash" />
+        <activity android:name=".CreatGroups.CreatGroupsView.CreatGroupActivity" />
         <activity
             android:name=".HomePackage.HomeView.HomeActivity"
             android:label="@string/title_activity_home" />
@@ -34,6 +53,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".alarm.AlarmService" />
+        <service
+            android:name=".WhatsAppPackage.MessageService"
+            android:label="MessageService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/xml_whatsapp" />
+
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

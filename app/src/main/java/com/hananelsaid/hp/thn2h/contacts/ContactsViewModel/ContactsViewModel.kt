@@ -1,17 +1,14 @@
 package com.hananelsaid.hp.thn2h.contacts.ContactsViewModel
 
-import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsView.CreatGroup
 import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
 import com.hananelsaid.hp.thn2h.contacts.ContactsRepository.ContactsRepository
 import com.hananelsaid.hp.thn2h.contacts.ContactsViews.ContactsFragment
 
 class ContactsViewModel : ViewModel {
     var viewRef: ContactsFragment? = null
-   // var creatGroupRef:CreatGroup?=null
+   // var creatGroupActivityRef:CreatGroupActivity?=null
     var repoRef: ContactsRepository? = null
     private lateinit var mutableLiveData: MutableLiveData<List<Contact>>
 

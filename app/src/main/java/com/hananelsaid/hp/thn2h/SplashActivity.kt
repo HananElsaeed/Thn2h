@@ -24,6 +24,7 @@ class SplashActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         setContentView(R.layout.activity_main)
+
         Handler().postDelayed({
             if(auth!!.currentUser!=null){
                 startActivity(Intent(this, HomeActivity::class.java))
