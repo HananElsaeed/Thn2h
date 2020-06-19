@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.provider.Settings
+import android.support.v4.media.MediaBrowserCompat
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
@@ -30,11 +31,11 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.hananelsaid.hp.thn2h.AddMessage.Model.MessageClass
 import com.hananelsaid.hp.thn2h.HomePackage.HomeView.HomeActivity
-import com.hananelsaid.hp.thn2h.MyReceiver
 import com.hananelsaid.hp.thn2h.ui.ChooseReciver.ChooseReciverActivity
 import com.hananelsaid.hp.thn2h.R
 import com.hananelsaid.hp.thn2h.WhatsAppContacts
 import com.hananelsaid.hp.thn2h.WhatsAppPackage.MessageService
+import com.hananelsaid.hp.thn2h.alarm.AlarmReciver
 import com.hananelsaid.hp.thn2h.alarm.AlarmService
 import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
 import com.hananelsaid.hp.thn2h.contacts.ContactsViews.ContactsFragment
@@ -499,18 +500,20 @@ class AddMessageActivity : AppCompatActivity() {
 
     }
 
-    fun setMessageAlarm(numberList: ArrayList<String>, sendVia: String) {
+    fun setMessageAlarm(numberList: ArrayList<String>, sendVia: String,message:String) {
 
-        var intent = Intent(this, AlarmService::class.java)
+        var intent = Intent(this, AlarmReciver::class.java)
+        intent.setAction(calendarAlarm.timeInMillis.toString())
+       // intent.setAction(Long.toString(System.currentTimeMillis()))
         intent.putExtra("msgText", message)
         intent.putExtra("sendVia", sendVia)
         intent.putStringArrayListExtra("numbers", numberList)
+        Log.i("sendornot", sendVia)
 
-        var pendingIntent: PendingIntent = PendingIntent.getService(
-            applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        var pendingIntent: PendingIntent = PendingIntent.getBroadcast(
+            applicationContext, 0, intent, 0)
         var am: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        am!!.set(AlarmManager.RTC_WAKEUP, calendarAlarm.timeInMillis, pendingIntent)
+        am!!.setExact(AlarmManager.RTC_WAKEUP, calendarAlarm.timeInMillis, pendingIntent)
     }
 
 
@@ -522,7 +525,7 @@ class AddMessageActivity : AppCompatActivity() {
         )
         addMessageViewModel.uploadMessage(messageClass)
         Toast.makeText(this, "SMS Send at " + date + time1, Toast.LENGTH_LONG).show()
-        setMessageAlarm(numbersListt, sendVia)
+        setMessageAlarm(numbersListt, sendVia,message)
 
 
     }
