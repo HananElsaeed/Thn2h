@@ -51,7 +51,7 @@
         </activity>
         <receiver android:name=".alarm.AlarmReciver"/>
 
-        <service android:name=".alarm.AlarmService" />
+
         <service
             android:name=".WhatsAppPackage.MessageService"
             android:label="MessageService"

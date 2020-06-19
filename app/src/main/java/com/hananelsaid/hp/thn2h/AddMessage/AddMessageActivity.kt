@@ -33,12 +33,8 @@ import com.hananelsaid.hp.thn2h.AddMessage.Model.MessageClass
 import com.hananelsaid.hp.thn2h.HomePackage.HomeView.HomeActivity
 import com.hananelsaid.hp.thn2h.ui.ChooseReciver.ChooseReciverActivity
 import com.hananelsaid.hp.thn2h.R
-import com.hananelsaid.hp.thn2h.WhatsAppContacts
 import com.hananelsaid.hp.thn2h.WhatsAppPackage.MessageService
 import com.hananelsaid.hp.thn2h.alarm.AlarmReciver
-import com.hananelsaid.hp.thn2h.alarm.AlarmService
-import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
-import com.hananelsaid.hp.thn2h.contacts.ContactsViews.ContactsFragment
 import kotlinx.android.synthetic.main.activity_add_message.*
 import java.text.DateFormat
 import java.text.ParseException
