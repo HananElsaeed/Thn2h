@@ -11,8 +11,8 @@ import com.hananelsaid.hp.thn2h.AddMessage.Model.MessageClass
 
 class CompletedMessagesRepo {
 
-    fun loadCompletedMessages(ref: DatabaseReference): MutableLiveData<ArrayList<MessageClass>> {
-        return FirebasCompletedMessages.viewMessages(ref)
+    fun loadCompletedMessages(ref: DatabaseReference ,timeNow: Long): MutableLiveData<ArrayList<MessageClass>> {
+        return FirebasCompletedMessages.viewMessages(ref,timeNow)
     }
 
 
@@ -22,7 +22,8 @@ object FirebasCompletedMessages {
     var liveData = MutableLiveData<ArrayList<MessageClass>>()
     var messagesList = ArrayList<MessageClass>()
 
-    fun viewMessages(ref: DatabaseReference): MutableLiveData<ArrayList<MessageClass>> {
+
+    fun viewMessages(ref: DatabaseReference,timeNow:Long): MutableLiveData<ArrayList<MessageClass>> {
 
         var groupsList = ArrayList<MessageClass>()
         ref.addValueEventListener(object : ValueEventListener {
@@ -34,7 +35,8 @@ object FirebasCompletedMessages {
                     val value = groupSnapshot.getValue(MessageClass::class.java)
 
                     // Log.i("FireUtilL", value.get("userid").toString())
-                    if (value!!.getSmsStatus().equals("Completed")){
+                    if (value!!.getSmsCalender()<=timeNow){
+
 
                         var message = MessageClass(value.getSmsId(),value.getsmsReceivers(),value.getSmsMsg(),value.getSmsDate()
                             ,value.getSmsTime(),value.getSmsStatus(),value.getSmsType()

@@ -70,11 +70,12 @@ class PendingMessageFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        loadMessags()
+         var timeNow: Long = System.currentTimeMillis()
+        loadMessags(timeNow)
     }
 
-    fun loadMessags() {
-        pendingViewModel.loadPendingMessages(mdatabaseReference).observe(this, Observer {
+    fun loadMessags(timeNow:Long) {
+        pendingViewModel.loadPendingMessages(mdatabaseReference,timeNow).observe(this, Observer {
 
             pendingAdabter!!.setData(it)
         })

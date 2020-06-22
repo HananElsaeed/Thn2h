@@ -5,6 +5,7 @@ import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.MediaStore
 import com.hananelsaid.hp.thn2h.CreatGroups.CreatGroupsViewModel.CreatGroupViewModel
+import com.hananelsaid.hp.thn2h.WhatsAppContacts
 import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
 import com.hananelsaid.hp.thn2h.contacts.ContactsViewModel.ContactsViewModel
 import com.hananelsaid.hp.thn2h.ui.ChooseReciver.ChooseContacts.ChooseContactsViewModel
@@ -59,6 +60,7 @@ class ContactsRepository {
             }
             contactList.add(obj)
         }
+
         //contact_list.adapter = ContactAdapter(contactList,this)
         contacts.close()
 
@@ -67,6 +69,15 @@ class ContactsRepository {
                 return o1.name.compareTo(o2.name)
             }
         })
+        object : Thread() {
+            override fun run() {
+                val whatsAppList = WhatsAppContacts.whatsAppList(context!!)
+
+               for ( contact:Contact in contactList){
+                   var number=contact.number
+                contact.IsWhatsappContact = whatsAppList.contains(number)}
+            }
+        }.start()
 
 
         return contactList

@@ -58,11 +58,13 @@ class CompletedMessagesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        loadMessags()
+        var timeNow: Long = System.currentTimeMillis()
+        loadMessags(timeNow)
+
     }
 
-    fun loadMessags() {
-        completedViewModel.loadCompletedMessages(mdatabaseReference).observe(this, Observer {
+    fun loadMessags(timeNow:Long) {
+        completedViewModel.loadCompletedMessages(mdatabaseReference,timeNow).observe(this, Observer {
 
             completedAdabter!!.setData(it)
         })

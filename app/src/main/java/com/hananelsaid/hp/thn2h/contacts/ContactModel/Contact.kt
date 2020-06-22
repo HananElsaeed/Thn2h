@@ -7,6 +7,7 @@ class Contact {
     var number = ""
     var image : Bitmap? = null
     private var isSelected: Boolean = false
+     var IsWhatsappContact:Boolean=false
 
     fun setSelected(selected: Boolean) {
         isSelected = selected;
@@ -16,5 +17,7 @@ class Contact {
     fun isSelected(): Boolean {
         return isSelected;
     }
+
+
 
 }

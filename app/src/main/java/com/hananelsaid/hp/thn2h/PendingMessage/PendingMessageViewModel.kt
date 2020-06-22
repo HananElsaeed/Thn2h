@@ -19,8 +19,8 @@ class PendingMessageViewModel : ViewModel{
         mutableLiveData = MutableLiveData()
     }
 
-    fun loadPendingMessages(ref: DatabaseReference):MutableLiveData<ArrayList<MessageClass>>{
-        return pengimgMessageRepo.loadPendingMessages(ref)
+    fun loadPendingMessages(ref: DatabaseReference,timeNow:Long):MutableLiveData<ArrayList<MessageClass>>{
+        return pengimgMessageRepo.loadPendingMessages(ref,timeNow)
     }
 
 

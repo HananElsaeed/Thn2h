@@ -7,18 +7,21 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.hananelsaid.hp.thn2h.AddMessage.Model.MessageClass
+
 class PendingmessageRepo {
 
-    fun loadPendingMessages(ref: DatabaseReference): MutableLiveData<ArrayList<MessageClass>> {
-        return FirebasPendingMessages.viewMessages(ref)
+
+    fun loadPendingMessages(ref: DatabaseReference,timeNow: Long): MutableLiveData<ArrayList<MessageClass>> {
+        return FirebasPendingMessages.viewMessages(ref,timeNow)
     }
 }
 
 object FirebasPendingMessages {
+
     var liveData = MutableLiveData<ArrayList<MessageClass>>()
     var messagesList = ArrayList<MessageClass>()
 
-    fun viewMessages(ref: DatabaseReference): MutableLiveData<ArrayList<MessageClass>> {
+    fun viewMessages(ref: DatabaseReference,timeNow:Long): MutableLiveData<ArrayList<MessageClass>> {
 
         //var groupsList = ArrayList<MessageClass>()
         ref.addValueEventListener(object : ValueEventListener {
@@ -29,12 +32,26 @@ object FirebasPendingMessages {
                 for (messageSnapshot in dataSnapshot.children) {
                     val value = messageSnapshot.getValue(MessageClass::class.java)
 
-                   // Log.i("FireUtilL", value.get("userid").toString())
-                    if (value!!.getSmsStatus().equals("Pending")){
+                    // Log.i("FireUtilL", value.get("userid").toString())
+                    val smsDate = value!!.getSmsCalender()
 
-                        var message = MessageClass(value.getSmsId(),value.getsmsReceivers(),value.getSmsMsg(),value.getSmsDate()
-                            ,value.getSmsTime(),value.getSmsStatus(),value.getSmsType()
-                            ,value.getUserID(),value.getSmsCalender(),value.getSmsDelivered())
+                    if (smsDate > timeNow) {
+                        Log.i("timetime ", "smstime"+smsDate +"time now "+ timeNow)
+
+                        var message = MessageClass(
+                            value.getSmsId(),
+                            value.getsmsReceivers(),
+                            value.getSmsMsg(),
+                            value.getSmsDate()
+                            ,
+                            value.getSmsTime(),
+                            value.getSmsStatus(),
+                            value.getSmsType()
+                            ,
+                            value.getUserID(),
+                            value.getSmsCalender(),
+                            value.getSmsDelivered()
+                        )
                         messagesList.add(message)
 
                     }

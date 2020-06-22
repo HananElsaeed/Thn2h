@@ -1,27 +1,21 @@
 package com.hananelsaid.hp.thn2h.contacts.ContactsViews
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.hananelsaid.hp.thn2h.HomePackage.HomeView.HomeActivity
+import com.hananelsaid.hp.thn2h.R
+import com.hananelsaid.hp.thn2h.WhatsAppContacts
 import com.hananelsaid.hp.thn2h.contacts.ContactModel.Contact
 import kotlinx.android.synthetic.main.contact_child.view.*
-import android.R
-import android.widget.Filter
-import android.widget.Filterable
-import android.R.attr.name
-import android.widget.Toast
-import android.R.attr.name
-import android.annotation.SuppressLint
-import android.graphics.Color
-import android.R.attr.name
-import android.R.attr.name
 
 
 class ContactAdapter : RecyclerView.Adapter<ContactAdapter.HolderClass>(), Filterable {
@@ -40,8 +34,9 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.HolderClass>(), Filte
 
     @SuppressLint("ResourceType")
     override fun onBindViewHolder(holder: HolderClass, position: Int) {
+        // var whatsAppNumberOrNot: Boolean = false
         val contact: Contact = list!!.get(position)
-        if(contact!=null) {
+        if (contact != null) {
             holder.position = position
             holder.contactName.setText(contact.name)
             holder.contactNumber.setText(contact.number)
@@ -49,18 +44,19 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.HolderClass>(), Filte
                 holder.contactImage.setImageBitmap(contact.image)
             else
                 holder.contactImage.setImageDrawable(
-                    ContextCompat.getDrawable(ctx!!, com.hananelsaid.hp.thn2h.R.drawable.thn2h)
+                    ContextCompat.getDrawable(ctx!!,R.drawable.thn2h)
                 )
             if (contact.isSelected()) {
-                holder.view.setBackgroundResource(com.hananelsaid.hp.thn2h.R.drawable.btnexittext)
+                holder.view.setBackgroundResource(R.drawable.btnexittext)
             } else {
-                holder.view.setBackgroundResource(com.hananelsaid.hp.thn2h.R.drawable.cardselectedbackground)
+                holder.view.setBackgroundResource(R.drawable.cardselectedbackground)
             }
+            holder.ivWatsapp.isVisible = contact.IsWhatsappContact
 
 
         }
         holder.view.setOnClickListener(View.OnClickListener {
-            val model1:Contact = list!!.get(position)
+            val model1: Contact = list!!.get(position)
             if (model1.isSelected()) {
                 model1.setSelected(false)
             } else {
@@ -95,9 +91,11 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.HolderClass>(), Filte
         val contactName: TextView
         val contactNumber: TextView
         val contactImage: ImageView
+        val ivWatsapp: ImageView
         val view: View
+
         //val ivMainphoto: ImageView
-        var position:Int?=0
+        var position: Int? = 0
 
 
         @SuppressLint("ResourceAsColor")
@@ -105,6 +103,7 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.HolderClass>(), Filte
             contactName = itemView.tv_name
             contactNumber = itemView.tv_number
             contactImage = itemView.iv_profile
+            ivWatsapp = itemView.imageView3
             //ivMainphoto = itemView.ivmainphoto
             this.view = itemView
             /*

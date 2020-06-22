@@ -23,10 +23,9 @@ class ChooseContactsViewModel : ViewModel {
     }
 
 
-
-
     fun getAllOrders(): MutableLiveData<ArrayList<Contact>> {
         // val contactsList = repoRef!!.getContactsList()
+
         mutableLiveData.postValue(repoRef!!.getContactsList(creatGroupActivityRef!!.activity!!))
 
         return mutableLiveData as MutableLiveData<ArrayList<Contact>>

@@ -16,7 +16,7 @@ class CompletedMessagesViewModel : ViewModel {
         mutableLiveData = MutableLiveData()
     }
 
-    fun loadCompletedMessages(ref: DatabaseReference):MutableLiveData<ArrayList<MessageClass>>{
-        return completedMessageRepo.loadCompletedMessages(ref)
+    fun loadCompletedMessages(ref: DatabaseReference,timeNow:Long):MutableLiveData<ArrayList<MessageClass>>{
+        return completedMessageRepo.loadCompletedMessages(ref,timeNow)
     }
 }
